@@ -254,6 +254,26 @@ Recovery Time objective is the maximum acceptable delay between the interruption
 Recovery point objective is the maximum acceptable amount of time since the last data recovery point. This objective determines what is considered an acceptable loss of data between the last recovery point and the interuption of service and is defined by the organisation.
 
 
-
 ## Amazon Bracket
+
+
+## AWS API / Management Console
+
+
+
+## ARNs
+
+Amazon resource names uniquely identity AWS ressources
+
+```
+arn:partition:service:region:account-id:resource-id
+arn:partition:service:region:account-id:resource-type/resource-id
+arn:partition:service:region:account-id:resource-type:resource-id
+```
+- partition: asw - aws regions
+- service: ec2, s3
+- region: us-east-1
+- accountId: 123456
+
+
 
