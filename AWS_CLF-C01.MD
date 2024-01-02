@@ -260,7 +260,6 @@ Recovery point objective is the maximum acceptable amount of time since the last
 ## AWS API / Management Console
 
 
-
 ## ARNs
 
 Amazon resource names uniquely identity AWS ressources
@@ -276,4 +275,70 @@ arn:partition:service:region:account-id:resource-type:resource-id
 - accountId: 123456
 
 
+
+
+## AWS Cloudshell
+it's a browser based shell built into the aws management console
+
+
+## Infrastructure as code (IaC)
+
+script to automate create, update, destroy cloud infrastructure
+
+- iac is a blueprint of your infrastructure
+- iac allows you to easily share, version or inventory your cloud infra
+
+- AWS cloudformation (CFN): 
+    - declarative,
+    - explicit, 
+    - verbose, 
+    - zero chance of misconfiguration
+    - json/yaml/xml
+
+- AWS Cloud Development Kit (CDK)
+    - imperative
+    - implicit
+    - less verbose
+    - programmable
+
+## CloudFormation
+allows you to write infrastructure as code in json/yaml. It's is simple but lead to larger files, limited in some regards to creating dynamic or repeatable infrastructure compared to CDK
+
+
+
+# KodeKloud
+
+### Economics of CC
+
+1. Free Tier
+Free services means that certain services are always free, and some are free for 12 months after new account creation
+
+2. On-Demand
+On demand is full pricing and pay as you go, but no contract and flexible
+
+3. Reservations
+Contracts that you enter with Amazon for 1|3 year contract
+
+4. Volume discount
+S3 - the more you use the lower it costs per unit
+
+5. Price Drops
+129 price drops since 2006
+
+
+### Cloud design principles
+
+More at [AWS Architecture Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+
+Book: Code Complete - Steve MacConnell
+
+1. Design for failure
+2. Decouple components
+3. Implement elasticity (scale out|in base on demands)
+4. Think parallel
+
+
+## Security
+
+### Shared responsability model
 
