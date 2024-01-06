@@ -337,8 +337,81 @@ Book: Code Complete - Steve MacConnell
 3. Implement elasticity (scale out|in base on demands)
 4. Think parallel
 
+### Shared responsability model
 
 ## Security
 
-### Shared responsability model
+1. Preventative services
+
+#### AWS web application Firewall
+Protection for any http based application, listen to incoming http request, monitor attack vector 
+- Define set of rules WEB ACL:
+- ressource to monitor
+- define inspection critaria: IP, country of origin, regex match of request, malicious code (SQL injection, XSS) malicious code)
+- action: Allow, Block, Count, CAPTCHA
+
+#### AWS Shield
+Protection against DDOS attack (flooding a server with huge amount of requests)
+
+#### Network firewalls
+Monitor traffic entering / leaving a VPC.
+
+2. Detective services
+
+#### Amazon inspector: 
+Scans workloads running on AWS for vulnerabitilies and undesired network exposure. Automatically discover EC2 instances, containers images in ECR, lambda functions. When vulnerabilites are found, it generates a report with the findings. Re-runs scans whenever changes that could introduce new vulnerabilites (install new package, patch, new cve published)
+
+#### Amazon GuardDuty
+Enable with few clicks in AWS management console. Continuously monitor: abnormal api activity, Attempts to disable AWS CloudFront logging, Potential unauthorized deployment, compromised instances. S3 Bucket compromise. Detect threats with machine learning and abnormal detection to identify potential threats. Review findings into event management or trigger AWS lambda function for automated remediation.
+
+#### Amazon Detective
+Ingest data from VCP flow logs, CloudTrail logs, GuardDuty findings. Create visualization to show resource behaviors and interactions over time
+
+#### AWS config
+Track and audits the configuration of AWS resources over time. Eg: Attached new security group to ecs. Attached EBS volume. Modify Http rules for WAF: all get logs in AWS config
+
+#### Security Hub
+Centralized AWS inspector & Guard Duty in central location. Automate security checks perform validation against AWS security best practices.
+
+#### CloudTrail
+Track user activity within an AWS account. Anytime a user performs an actcion within AWS, an event is logged in CloudTrail (eg: modifying security policies, access/create/delete a service, modify a config, ...)
+
+#### Security Lake
+Log aggregator with storage and query parquet format - ocsf open cybersecurity schema framework. 
+
+#### AWS Macie
+Service uses pattern matching and machine learning to automatically discover sensitive data and generate an inventory report of S3 buckets and scan objects for sensitive data. Notify you for all findings
+
+3. Management services
+
+#### Firewall Manager
+
+Centralized and share policies of AWS shield, WAS, AWS network Firewall between multiple accounts (dev, qa, prod)
+
+#### Resource Access Manager
+Share resources like private subnet between multiple accounts
+
+#### AWS Cognito
+Customer identity and access management for mobile and web applications. Signup, login without social authentications to any app. Manage all user credentials.
+
+#### IAM
+Manage acess resources for user group and roles though policies.
+
+#### IAM identity center
+Manage users throught multiple accounts. Grant access for different accounts
+
+#### Secrets Manager
+Store secrets, credentials for applications. Automatic rotation for secrets
+
+#### AWS Certificate Manager (ACM)
+Provisions, manages, and deploys SSL/TLS certificates for AWS resources
+
+#### AWS Private Certficate Authority
+Create a private CA to manage private certificates within an organization. Encrypt traffic with private certificate for internal use.
+
+#### Key Management Service (KMS)
+Create and manage (allow/deny access) encryptions keys to encrypt data with key for sensitive data 
+
+#### Cloud Hardware Security Module (HSM)
+HSM place to securily store cryptographic keys - Data is sent to HSM to Encryption/Decryption. Provides customer with hardware security modules in the cloud
 
