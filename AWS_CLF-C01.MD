@@ -415,3 +415,92 @@ Create and manage (allow/deny access) encryptions keys to encrypt data with key 
 #### Cloud Hardware Security Module (HSM)
 HSM place to securily store cryptographic keys - Data is sent to HSM to Encryption/Decryption. Provides customer with hardware security modules in the cloud
 
+Quizz:
+
+Which AWS service automates the process of assessing and managing the compliance of your AWS resources with industry standards and regulations?
+The correct answer is AWS Audit Manager. AWS Audit Manager is a service that automates the process of assessing and managing the compliance of your AWS resources with industry standards and regulations. It provides pre-built frameworks that map to popular compliance standards, such as PCI DSS, HIPAA, GDPR, and more. With AWS Audit Manager, you can easily create and customize assessments, collect evidence, and generate comprehensive reports to demonstrate compliance to auditors and stakeholders. 
+
+What is the purpose of AWS Security Hub?
+The correct answer is "A service that provides security monitoring and governance across multiple AWS accounts". AWS Security Hub is a comprehensive security service that helps you centrally manage security and compliance across multiple AWS accounts. It aggregates and prioritizes security findings from various AWS services, third-party products, and custom integrations, providing a unified view of security posture across your AWS environment. 
+
+# Methods of Deployments
+
+1. Console
+web application in a browser to manage all your aws resources. Limitation on repetitive task
+
+2. CLI - Command line interface
+Run commands in a terminal to execute request to AWS Api to create/manage resources. Requires settings 
+
+3. AWS SDK
+Programmatically though code to create/manage resources
+
+# AWS Global infrastructure
+
+## AWS region
+
+AWS region is a geographic location where resources can be deployed. They are isolated from each others
+- Fault tolerant
+- stability
+
+All regions are not the same. Not all services are available in all regions. Govcloud regions designed for US Goverment and customers who need to meet regulatory and compliance requirements.
+
+Select region as close to your customers as possible. 
+
+## AWS Availability Zones
+
+Zone within the same region to allow redundancy if one goes down with 3 independant datacenters.
+
+## Global Content Delivery & edge locations
+
+Smaller points of presence with services are run closer to customers. Are not attached to a parent region. Support mostly cloudfront. Small size datacenter. For content delivery mostly
+
+## Local zones
+
+They are extensions of an AWS Region. Allow to use select AWS services like compute and storage to end-users. Use for low latency applications like real time gaming, live streaming. It's always an extension of a parent region. Services like EC2 & EBS. Provide more services than edge locations.
+
+# AWS Networking
+
+When deploying in aws, customers have a virtual private cloud VPC. It's a secure isolated network segment hosted within AWS. Vpc isolates computing resources from other computing resources available in the cloud. It gives the customer full control of the networking in the cloud
+- subnetting (IP addresses) 
+- Routing (route tables) - how packets travers AWS enviroment
+- Firewalls (NACLs and security groups)
+- Gateways (allow traffic to enter/exit to internet)
+
+Customers can have multiple VPC. eg: one per environment / per application / per department (devs/finance/...). up to architect how to organize the VPC's. 
+
+
+### VPC
+A VPC is an AWS construct to isolates computing resources from others available in the cloud. They are specific/isolate to a region. Act as a network boundery.
+
+Every VPC has a range of IP addresses assigned to it called the CIDR block. It can be anywhere from a /16 to /28
+ eg: 192.168.0.0/16: 192.168.0.0 - 192.168.255.255
+
+### Subnet
+A group of IPs addresses in your VPC. Deployement are done within a subnet. A subnet resides within an availability zones.
+- private subnet: not expose to the internet (DB )
+- public subnet: expose to the internet
+
+By default it's a private subnet. 
+
+#### Internet Gateway:
+To make a subnet to be public, need to add an internet gateway to the VPC and allow subnet to connect to it to make it accessible to internet.
+
+#### Natgateway
+A connection/request must be initiated from within the VPC. Request must start from within the VPC to go to the internet and the response can comes back. 
+
+ Subnets within a VPC must be within the CIDR range.
+ 
+ CIDR = 192.168.0.0/16
+  - subnet 01: 192.168.10.0/24 - ok
+  - subnet 02: 10.100.1.0/24 - NOT OK outsite the cidr block
+
+> The first 4 IP addresses of a subnet are reserved and cannot be used.
+- 192.168.10.0 : network address
+- 192.168.10.1 -  192.168.10.3: Reserved by AWS
+- 192.168.10.255: broadcast address
+
+#### Virtual Private Gateway
+Give secure access to resources deployed on a private subnet over the internet encrypted
+
+#### Direct connect
+Direct connect (DX) location. You must physically connect your device in a direct connect location. With a high secure speed link with low latency 
