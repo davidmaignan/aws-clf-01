@@ -534,3 +534,82 @@ They act as firewalls for individual resources (EC2, LB, RDS)
 They are statefull 
 
 [img](./network_summary.png)
+
+# Storage
+
+## Block Storage AWS elastic block storage
+A collection of blocks can be presented to the OS as a volume
+
+EBS volumes can be mounted & booted (It's the only storage that is bootable)
+
+EBS are within an Availability zone
+
+Instances stores are removed when EC2 instances are stopped/started
+
+
+
+## File Storage - AWS EFS
+
+Stores data in a hierarchical structure of files and folders.
+
+Filesystem taht is accessible remotely
+ - create subdirectories
+ - stores and accesses files within
+ - can be mounted as file system inside an OS
+ - NOT bootable
+ - accessible over the network
+ - multiple clients can access the same data
+
+ ## S3 - Object storage
+ Store objects (files) of any type
+ No folder structure - everything is in the same folder
+ No mounting or booting
+ Storing logs, media files
+
+ ### S3 standard
+
+- Can handle two simultaneous AZ failures
+- durability 99.99999%
+- price GB/month
+- charged per GB outbound
+
+ ### S3 standard-IA (infrequent access)
+
+- Can handle two simultaneous AZ failures
+- durability 99.99999%
+- price GB/month (cheaper than standard)
+- charged per GB outbound
+- retrieval fee (min duration of 90 days)
+- minimum size chard of 128 kb
+- can get more expensive than standard if access too often
+
+### S3 One Zone-IA
+
+only in one AZ. rest same as standard IA
+
+3# Glacier-Instant
+
+- low cost option for rarely accessed data
+- performance same as that of S3 standard
+- retrieval fee (high)
+- minimum duration of 90 days
+- minimun size of 128 kb per object
+- instant retrieval
+
+### S3 Glacier-Flexible
+- has a retrieval fee
+- minimum duration charge of 90 days
+- minimum size charge of 40b per object
+- options: bulk (5-12 hours), expedited: 1-5 minutes, standard: 3-5 hours
+
+### S3 Glacier-Deep-Archive
+- data almost never needed
+- charged per gb
+- has a retrieval fee
+- minimum duration charge of 90 days
+- minimum size charge of 40b per object
+- standard: 12h - bulk: 48h
+
+### S3 Intelligent-Tiering
+- automatically reduces storage cost by intelligently moving data to the most cost effective access-tier
+- monitoring/automation cost per 1000 objects
