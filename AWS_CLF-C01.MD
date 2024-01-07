@@ -475,6 +475,16 @@ A VPC is an AWS construct to isolates computing resources from others available 
 Every VPC has a range of IP addresses assigned to it called the CIDR block. It can be anywhere from a /16 to /28
  eg: 192.168.0.0/16: 192.168.0.0 - 192.168.255.255
 
+ 1. Default VPC
+ - Every region has a default VPC with default subnets, Security Groups and NACLS
+ - CIDR is 172.31.0.0/16 (65536 addresses)
+ - one default subnet in each Availability Zone CIDR subnet is /20 (4096 addresses)
+ - one Internet gateway attached to the VPC. A route to points all traffic (0.0.0.0/0) to the internet gateway. 
+ - Security groups allow outbound and the NACLs are open in both inbound and outbound directions
+
+ 2. Custom VPC
+ allow you to create/modify all configuration associated with the VPC
+
 ### Subnet
 A group of IPs addresses in your VPC. Deployement are done within a subnet. A subnet resides within an availability zones.
 - private subnet: not expose to the internet (DB )
@@ -504,3 +514,23 @@ Give secure access to resources deployed on a private subnet over the internet e
 
 #### Direct connect
 Direct connect (DX) location. You must physically connect your device in a direct connect location. With a high secure speed link with low latency 
+
+### Firewalls
+
+#### Stateless firewall
+Rules are broken down into inbound and outbound rules. Stateless firewall must be configured to allow both inbound & outbound traffic
+
+#### Statefull firewall
+They are intelligent enough to understand which request and response are part of the same connection. If a request is permitted the response is automatically permitted as well in a stateful firewall. Track TCP request to automatically allow the response
+
+#### Network Access Control List (NACL)
+
+NACLS filter traffic entering and leaving a subnet
+NACLS do **NOT** filter traffic within a subnet
+NACLS are stateless firewalls so rules must be set for both inbound and outbound traffic.
+
+#### Security groupds
+They act as firewalls for individual resources (EC2, LB, RDS)
+They are statefull 
+
+[img](./network_summary.png)
